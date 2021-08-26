@@ -1,0 +1,39 @@
+
+# apiVersion: v1
+# kind: Pod
+# metadata: 
+#   name: sec-testing
+#   namespace: stark
+#   labels:
+#     name: sec-testing
+# spec:
+#   containers:
+#   - name: container-testing
+#     image: nginx
+#     ports: 
+#     - containerPort: 80
+
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: stark
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
